@@ -1,0 +1,69 @@
+#CSV 불러오기
+import pandas as pd
+
+df=pd.read_csv('***.csv', encoding='utf8')
+sorted_df=df.sort_values(by='점수',ascending=False) #내림차순 정렬
+
+
+
+#한글폰트 설정
+1.
+import matplotlib.pyplot as plt
+
+plt.rcParams['font.family'] = 'Malgun Gothic'
+plt.rcParams['axes.unicode_minus'] = False
+
+
+2.
+from matplotlib import font_manager, rc
+
+font_name = font_manager.FontProperties(fname='c:/Windows/Fonts/malgun.ttf').get_name()
+rc('font', family=font_name)
+
+
+
+
+#mysql
+import pymysql
+
+conn = pymysql.connect(
+    host='localhost', #내컴퓨터=127.0.0.1 / ip주소가 들어갈수도있음
+    user='user',
+    password='1234',
+    database='testdb',
+    charset='utf8'
+)
+cursor = conn.cursor()  #sql 실행기능
+sql = 'select * from score'
+cursor.execute(sql)  #sql 실행
+rows = cursor.fetchall()  #결과를 리스트로 저장
+for row in rows:
+    print(row)
+cursor.close()
+conn.close()
+...
+backup_path='score.csv'
+df.to_csv(backup_path, index=False)
+
+
+
+#oracle
+import oracledb
+conn = oracledb.connect('python/1234@localhost:1521/xe')
+
+cursor = conn.cursor()
+cursor.execute('select * from ontime order by id)
+rows = cursor.fetchall()
+for row in rows:
+    print(row)
+...
+backup_path = 'credit_risk.csv'
+df.to_csv(backup_path, index=False)
+print('CSV 백업 저장 완료:', backup_path)
+
+
+
+
+결측값처리
+#평균값/중위수/최빈값으로 결측값 처리
+df['나이']=df['나이'].fillna(df['나이'].mean/median/mode())

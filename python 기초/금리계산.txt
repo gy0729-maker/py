@@ -1,0 +1,24 @@
+def saving(money, years, rate):
+    result = money*(1+rate/100)**years
+                    10000*1.03*1
+    return result
+saving(100,5,0.03)
+
+money =10000
+years = np.arange(0,11)
+rate = [3,5,7]
+total_money = np.zeros((len(rate), len(years)))
+				3행    ,   10열    , 2차원 
+
+for i in range(len(rate)):
+    for j in range(len(years)):
+        total_money[i,j] = saving(money, years[j], rate[i])
+			3%,1~10	    10000,        1,      3
+    plt.plot(years, total_money[i,:], label='{}%'.format(rate[i]))
+		x        y-총금액[3,5,7%일때, 전체연도] 
+
+
+plt.legend(fontsize=14)
+plt.grid()
+plt.xlabel('Years', fontsize=14)
+plt.ylabel('Total money', fontsize=14)

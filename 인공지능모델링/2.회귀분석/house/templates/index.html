@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>회귀모형 테스트</title>
+</head>
+<body>
+    <h2>회귀모형 가격 예측</h2>
+
+    <form method="post" action="/predict">
+        면적(제곱미터) : <input name="sqm" type="number" step="0.1" required>
+        방 개수(rooms) : <input name="rooms" type="number" step="1" required>
+        <button type="submit">예측하기</button>
+    </form>
+</body>
+</html>
