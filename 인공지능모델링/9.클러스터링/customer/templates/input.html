@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>고객 클러스터 예측</title>
+</head>
+<body>
+<h2>고객 정보 입력</h2>
+
+<form action="/predict" method="post">
+    나이:
+    <input type="number" name="age" required>
+    <br>
+    월 소득:
+    <input type="number" name="income" required>
+    <br>
+    소비 점수:
+    <input type="number" name="spending_score" required>
+    <br>
+    <button type="submit">예측하기</button>
+</form>
+</body>
+</html>
