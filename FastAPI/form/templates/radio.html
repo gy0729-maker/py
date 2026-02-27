@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이름/성별 입력</title>
+</head>
+<body>
+<h2>이름과 성별 입력</h2>
+
+<form method="post" action="/radio">
+    name : <input type="text" name="name" id="name" required><br><br>
+
+    gender : <input type="radio" name="gender" value="male" id="male">male
+    <input type="radio" name="gender" value="female" id="female" checked>female
+
+    <br><br>
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>

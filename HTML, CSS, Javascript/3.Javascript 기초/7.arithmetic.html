@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+    function calc() {
+      x = parseInt(document.form1.a.value);
+      y = parseInt(document.form1.b.value);
+    document.write(x + y + "<br>");
+    document.write(x - y + "<br>");
+    document.write(x * y + "<br>");
+    document.write(x / y + "<br>");
+    document.write(x % y + "<br>");
+    }
+  </script>
+</head>
+<body>
+<form name="form1">
+  a: <input type="text" name="a" size="10" value="10">
+  b: <input type="text" name="b" size="10" value="20">
+  <input type="button" value="OK" onclick="calc()">
+</form>
+</body>
+</html>

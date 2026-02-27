@@ -1,55 +1,77 @@
 from fastapi import FastAPI, UploadFile, File
-from diffusers import StableDiffusionImg2ImgPipeline
-import torch
-from io import BytesIO
-from PIL import Image
-
-
+from fastapi.staticfiles import StaticFiles
+import os
+import cv2
+import numpy as np
+import random
 
 app = FastAPI()
 
-from fastapi.staticfiles import StaticFiles
-import os
+if not os.path.exists("uploads"):
+    os.makedirs("uploads")
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
-# 'outputs'라는 폴더를 만들고, 외부에서 접속 가능하게 설정
-if not os.path.exists("outputs"):
-    os.makedirs("outputs")
-
-app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
-
-# 1. AI 모델 불러오기 (컴퓨터 사양에 따라 시간이 걸릴 수 있어요)
-device = "cuda" if torch.cuda.is_available() else "cpu"
-model_id = "runwayml/stable-diffusion-v1-5"
-
-# 이미지를 이미지로 변형하는(Img2Img) 파이프라인 설정
-pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id,
-                                                      torch_dtype=torch.float16 if device == "cuda" else torch.float32)
-pipe = pipe.to(device)
+# 서버 상태를 저장할 변수들
+current_image = ""
+current_mod_image = ""
+answer_coords = {"x": 0.0, "y": 0.0}
 
 
-@app.post("/generate-game")
-async def generate_game(file: UploadFile = File(...)):
-    # 2. 휴대폰에서 보낸 원본 사진 받기
-    content = await file.read()
-    init_image = Image.open(BytesIO(content)).convert("RGB")
-    init_image = init_image.resize((512, 512))  # AI가 처리하기 좋은 크기로 변경
+@app.post("/upload")
+async def upload_image(image: UploadFile = File(...)):
+    global current_image, current_mod_image, answer_coords
 
-    # 3. AI에게 "이 사진을 살짝만 바꿔줘!"라고 요청 (틀린 그림 찾기용)
-    # strength가 높을수록 원본과 많이 달라집니다.
-    prompt = "high quality, subtle changes, photorealistic"  #strength 강도(난이도)
-    result = pipe(prompt=prompt, image=init_image, strength=0.3, guidance_scale=7.5).images[0]
+    file_name = image.filename
+    file_path = f"uploads/{file_name}"
+    with open(file_path, "wb") as buffer:
+        buffer.write(await image.read())
 
-    # 4. 결과 이미지 저장 및 확인 (나중에는 휴대폰으로 전송합니다)
-    result.save("game_image.png")
+    # OpenCV 변형 작업
+    img = cv2.imread(file_path)
+    h, w, _ = img.shape
 
-    return {"status": "success", "message": "게임 이미지가 생성되었습니다!"}
+    # 랜덤 정답 생성
+    ans_x = random.randint(int(w * 0.1), int(w * 0.9))
+    ans_y = random.randint(int(h * 0.1), int(h * 0.9))
+    size = 150
 
-    # ... 이전 AI 생성 코드 ...
-    file_name = "game_1.png"
-    file_path = f"outputs/{file_name}"
-    result.save(file_path)  # 결과 이미지를 outputs 폴더에 저장
+    mask = np.zeros((h, w), np.uint8)
+    cv2.rectangle(mask, (ans_x - size, ans_y - size), (ans_x + size, ans_y + size), 255, -1)
+    modified_img = cv2.inpaint(img, mask, 3, cv2.INPAINT_TELEA)
 
-    # 내 컴퓨터 IP 주소를 포함한 이미지 다운로드 주소 생성
-    image_url = f"http://YOUR_IP_ADDRESS:8000/outputs/{file_name}"
+    # 변형 이미지 저장 (이름 규칙: mod_파일이름)
+    mod_file_name = file_name.replace(".jpg", "_mod.jpg")
+    mod_file_path = f"uploads/{mod_file_name}"
+    cv2.imwrite(mod_file_path, modified_img)
 
-    return {"status": "success", "image_url": image_url}
+    # 데이터 업데이트
+    current_image = file_name
+    current_mod_image = mod_file_name
+    answer_coords = {"x": ans_x / w, "y": ans_y / h}
+
+    return {"message": "AI 변형 완료!", "filename": file_name}
+
+
+@app.get("/game")
+def get_game_data():
+    global current_image, current_mod_image, answer_coords
+
+    # 본인 컴퓨터 IP 확인 필수! (192.168.0.186 가 맞는지 확인하세요)
+    base_url = "http://192.168.0.186:8000/uploads/"
+
+    if not current_image:
+        return {
+            "image_url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+            "mod_image_url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+            "answer_x": 0.5,
+            "answer_y": 0.5,
+            "message": "사진을 먼저 업로드해주세요!"
+        }
+
+    return {
+        "image_url": base_url + current_image,
+        "mod_image_url": base_url + current_mod_image,  # 변형된 이미지 주소 추가
+        "answer_x": answer_coords["x"],
+        "answer_y": answer_coords["y"],
+        "message": "틀린 곳을 찾아보세요!"
+    }

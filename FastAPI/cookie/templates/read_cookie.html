@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>read_cookie</title>
+</head>
+<body>
+{% if not request.cookies.get('id') %}
+저장된 쿠키가 없습니다.
+<a href="/set_cookie">쿠키 생성</a>
+{% else %}
+{{ request.cookies.get('id') }}님 환영합니다.<br>
+{% endif %}
+<a href="/del_cookie">쿠키 삭제</a>
+<a href="/change_cookie">쿠키 변경</a>
+<a href="#" onclick="history.back()">Back</a>
+<a href="/">Home</a>
+</body>
+</html>

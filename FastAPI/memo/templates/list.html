@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>memo list</title>
+</head>
+<body>
+<h2>한줄 메모장</h2>
+
+<form method="post" action="/insert_memo">
+    이름 : <input name="writer">
+    메모 : <input name="memo">
+    <input type="submit" value="확인">
+</form>
+
+<table border="1">
+    <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>메모</th>
+        <th>날짜</th>
+    </tr>
+    {% for row in memoList %}
+    <tr>
+        <td>{{row.idx}}</td>
+        <td>{{row.writer}}</td>
+        <td><a href="/detail?idx={{row.idx}}">{{row.memo}}</a></td>
+        <td>{{row.post_date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

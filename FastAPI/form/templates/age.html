@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>나이 계산</title>
+    <script>
+        function check() {
+        const name = document.getElementById("name");
+        const year = document.getElementById("year");
+
+        if (name.value.trim() === "") {
+        alert("이름을 입력하세요.");
+        name.focus();
+        return;
+        }
+
+        if (year.value.trim() === "") {
+        alert("연도를 입력하세요.");
+        year.focus();
+        return;
+        }
+
+        document.getElementById("form1").submit();
+        }
+    </script>
+</head>
+<body>
+<h2>나이 계산</h2>
+
+<form id="form1" method="post" action="/age">
+    이름: <input type="text" name="name" id="name"><br><br>
+    연도: <input type="text" name="year" id="year"><br><br>
+    <input type="button" value="확인" onclick="check()">
+</form>
+</body>
+</html>

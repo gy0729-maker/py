@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>미니 매출 관리 시스템</title>
+    <script>
+        function deleteItem(id) {
+            if (confirm("삭제하시겠습니까?")) {
+                const form = document.createElement("form");
+                form.method = "post";
+                form.action = "/delete";
+
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "id";
+                input.value = id;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+        }}
+    </script>
+</head>
+<body>
+
+<h2>미니 매출 관리 시스템</h2>
+<form action="/add" method="post">
+    상품명 <input type="text" name="product" required>
+    수량 <input type="number" name="qty" required>
+    단가 <input type="number" name="price" required>
+    <button type="submit">등록</button>
+    <button onclick="window.print()">인쇄</button>
+</form>
+<hr>
+
+<table border="3">
+    <tr>
+        <th>ID</th>
+        <th>상품명</th>
+        <th>수량</th>
+        <th>단가</th>
+        <th>금액</th>
+    </tr>
+
+    {% for s in sales %}
+    <tr>
+        <form action="/update" method="post">
+            <td>{{s.id}}
+            <input type="hidden" name="id" value="{{s.id}}"></td>
+            <td><input type="text" name="product" value="{{s.product}}"></td>
+            <td><input type="number" name="qty" value="{{s.qty}}"></td>
+            <td><input type="number" name="price" value="{{s.price}}"></td>
+            <td>{{s.amount}}</td>
+        <td>
+            <button type="submit">수정</button>
+            <button type="button" onclick="deleteItem({{s.id}})">삭제</button>
+        </td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>합계 금액: {{total_sum}}</h3>
+
+</body>
+</html>

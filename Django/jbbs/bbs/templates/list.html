@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 목록</title>
+</head>
+<body>
+<h2>게시글 목록</h2>
+
+<table border="1" width="800">
+    <tr>
+        <th>ID</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+    </tr>
+    {% for post in posts %}
+    <tr>
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.writer}}</td>
+        <td>{{post.created_at}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

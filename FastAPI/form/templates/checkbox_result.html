@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결과</title>
+</head>
+<body>
+<h3>fruits</h3>
+
+{% if fruits is defined and fruits %}
+<ul>
+  {% for fruit in fruits %}
+  <li>{{fruit}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>선택한 과일이 없습니다.</p>
+{% endif %}
+<a href="#" onclick="history.back()">Back</a>
+<a href="/">Home</a>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  <script>
+    function multi_table(){
+    num=document.getElementById("num").value;
+    if(num.length==0) return;
+    str="";
+    for( i=1; i<=9; i++ ) {
+    //str += num+" x "+i+" = "+num*i+"<br>";
+    str += `${num}x${i}=${num*i}<br>`;
+    }
+    document.getElementById("result").innerHTML=str;
+    }
+  </script>
+</head>
+<body>
+<input type="text" id="num" value="3" size="5" onkeyup="multi_table()">
+<input type="button" value="OK" onclick="multi_table()">
+<div id="result"></div>
+</body>
+</html>

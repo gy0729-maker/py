@@ -1,0 +1,97 @@
+pip install django
+
+파이썬 프로젝트 만들기
+
+1.장고 기능 추가
+터미널에서
+프로젝트 경로에서 실행->config 패키지 생성
+django-admin startproject config .
+
+2.장고 앱 추가(address, bbs, memo...)
+터미널에서
+장고 앱 추가
+python manage.py startapp address
+
+3.installed_apps / database / 날짜,시간 설정 등 세팅
+config>setting.py에서
+app 'address'추가, database 오라클로 추가(기본 sqlite-로컬전용)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'xe',
+        'USER': 'python',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '1521',
+    }
+}
+
+4.테이블 모델 만들기(table을 만들기 위한 기본틀)
+migrations>models.py에서
+table class 생성
+
+(5. 관리자 권한 필요한경우)
+migrations>admin.py에서
+관리자페이지 설정(address와 addressadmin 추가)
+
+6.DB에 반영
+터미널에서
+#DB변경사항 수집
+python manage.py makemigrations
+#DB에 반영
+python manage.py migrate
+
+(#관리자계정 추가->admin/1234로 생성
+python manage.py createsuperuser)
+
+7.터미널에서
+#웹서버 구동
+python manage.py runserver localhost:80
+http://localhost/admin/
+접속해서 로그인하면 관리가능
+
+8.서비스 접속 주소 설정(서비스주소+함수 매핑)
+config>urls.py 에서
+urlpatterns.append(path('admin/',admin.site.urls))
+django는 url 파일이 별도로 있음
+
+9.실행함수(클래스)
+migrations>views.py
+home 함수 설정
+
+10.html 페이지 화면 출력
+address>temmplates>list.html 에서
+html 화면 구성
+
+    <한 세트>
+    `주소 url
+    `기능 views
+    `화면 html
+
+
+
+
+---추가/변경---
+html 작성/편집
+    form
+        input type='text'
+        자바스크립트
+urls.py 패턴추가
+views.py 함수추가
+    1.수정완료
+    2.리스트로이동
+
+11.
+address>temmplates>list.html 에서
+'등록'링크 추가
+12.
+urls.py
+경로 [입력폼] 추가
+13.
+views.py
+함수 [write] 추가
+14.
+write.html 생성
+
+-
+

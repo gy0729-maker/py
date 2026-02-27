@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>금액 계산</title>
+    <script>
+        function check() {
+        let price = document.getElementById("price");
+        let amount = document.getElementById("amount");
+
+        if (price.value.trim() === "") {
+        alert("Enter the price");
+        price.focus();
+        return;
+        }
+
+        if (amount.value.trim() === "") {
+        alert("Enter the quantity.");
+        amount.focus();
+        return;
+        }
+
+        if (isNaN(price.value) || isNaN(amount.value)) {
+        alert("Numbers only.");
+        return;
+        }
+
+        document.getElementById("form1").submit();
+        }
+    </script>
+</head>
+<body>
+
+<h2>금액 계산</h2>
+
+<form id="form1" method="post" action="/button">
+    price : <input type="text" name="price" id="price"><br><br>
+    amount : <input type="text" name="amount" id="amount"><br><br>
+    <button type="button" onclick="check()">OK</button>
+</form>
+</body>
+</html>

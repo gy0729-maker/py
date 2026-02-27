@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function calc(){
+        x = document.getElementById("x").value;
+        y = document.getElementById("y").value;
+        sum = parseInt(x)+parseInt(y);
+        document.getElementById("sum").value=sum;
+        }
+    </script>
+</head>
+<body>
+x : <input id="x" size="10"><br>
+y : <input id="y" size="10"><br>
+sum : <input id="sum" size="10"><br>
+<input type="button" value="OK" onclick="calc()">
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>직원 리스트</title>
+    <style>
+        table{
+            border: 1px dashed black;
+            border-collapse: collapse;
+<!--dotted:점선, solid:실선, dashed 대시선-->
+        }
+
+        th, td{
+            border: 1px solid black;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>직원 리스트</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>이름</th>
+        <th>부서</th>
+        <th>입사일</th>
+    </tr>
+    {% for emp in employees %}
+    <tr>
+        <td>{{emp.id}}</td>
+        <td>{{emp.name}}</td>
+        <td>{{emp.department}}</td>
+        <td>{{emp.hire_date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

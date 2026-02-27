@@ -48,6 +48,9 @@ df.to_csv(backup_path, index=False)
 
 
 #oracle
+cmd - sqlplus python/1234	오라클 접속
+
+
 import oracledb
 conn = oracledb.connect('python/1234@localhost:1521/xe')
 

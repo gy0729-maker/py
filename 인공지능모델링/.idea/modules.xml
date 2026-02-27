@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/../mysql/.idea/mysql.iml" filepath="$PROJECT_DIR$/../mysql/.idea/mysql.iml" />
       <module fileurl="file://$PROJECT_DIR$/../python 기초/.idea/python 기초.iml" filepath="$PROJECT_DIR$/../python 기초/.idea/python 기초.iml" />
       <module fileurl="file://$PROJECT_DIR$/../study/.idea/study.iml" filepath="$PROJECT_DIR$/../study/.idea/study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../이미지 분류/.idea/이미지 분류.iml" filepath="$PROJECT_DIR$/../이미지 분류/.idea/이미지 분류.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/인공지능모델링.iml" filepath="$PROJECT_DIR$/.idea/인공지능모델링.iml" />
     </modules>
   </component>

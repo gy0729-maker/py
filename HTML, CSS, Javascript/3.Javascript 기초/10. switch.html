@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        season = prompt("favorite season:", "spring");
+        switch(season) {
+        case "spring":
+            img = "spring.jpg";
+            break;
+        case "summer":
+            img = "summer.jpg";
+            break;
+        case "autumn":
+            img = "autumn.jpg";
+            break;
+        case "winter":
+            img = "winter.jpg";
+            break;
+        default:
+            alert('error');
+        }
+        document.write("<h2>" + season + "</h2>");
+        document.write("<img src='images/"+img+"'>");
+    </script>
+</head>
+<body>
+
+</body>
+</html>

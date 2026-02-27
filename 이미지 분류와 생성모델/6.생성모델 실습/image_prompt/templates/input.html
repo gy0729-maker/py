@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>이미지 생성</title>
+</head>
+<body>
+<h2>프롬프트 입력</h2>
+
+{#text가 한줄 이상일때#}
+<textarea id="prompt" rows="6" cols="70">
+{#a realistic photo of a cat,#}
+{#natural pose, soft studio lighting,#}
+{#simple background, high quality, photorealistic#}
+</textarea>
+<br><br>
+<button onclick="start()">이미지 생성</button>
+
+<p id="status"></p>
+
+
+{##자바스크립트#}
+<script>
+    {#function 자바함수#}
+    function start() {
+        document.getElementById("status").innerText = "이미지 생성 중입니다... 잠시만 기다려 주세요";
+
+        fetch("/start", {
+            method: "POST",
+            body: new URLSearchParams({
+                prompt: document.getElementById("prompt").value
+            })
+        })
+            {#.then:작업이 끝나면 (input => output)#}
+            .then(res => res.json())
+            .then(data => {
+                check(data.task_id);
+            });
+    }
+
+    function check(task_id) {
+        fetch("/status/" + task_id)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "done") {
+                    window.location.href = "/result/" + task_id;
+                } else {
+                    {#1초에 한번 작업체크 (1000ms)#}
+                    setTimeout(() => check(task_id), 1000);
+                }
+            });
+    }
+</script>
+
+</body>
+</html>
+
+
+
+

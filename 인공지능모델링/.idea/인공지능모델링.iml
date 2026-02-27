@@ -8,5 +8,6 @@
     <orderEntry type="module" module-name="study" />
     <orderEntry type="module" module-name="mysql" />
     <orderEntry type="module" module-name="android" />
+    <orderEntry type="module" module-name="이미지 분류" />
   </component>
 </module>

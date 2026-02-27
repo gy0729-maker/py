@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function timer() {
+    now = new Date();
+
+    month = now.getMonth() + 1;
+    if (month < 10) {
+        month = "0" + month;
+    }
+    date = now.getDate();
+    if (date < 10) {
+        date = "0" + date;
+    }
+    hour = now.getHours();
+    if (hour < 10) {
+        hour = "0" + hour;
+    }
+    min = now.getMinutes();
+    if (min < 10) {
+        min = "0" + min;
+    }
+    sec = now.getSeconds();
+    if (sec < 10) {
+        sec = "0" + sec;
+    }
+    str = `${now.getFullYear()}-${month}-${date} ${hour}:${min}:${sec}`;
+    console.log(str);
+    document.getElementById("div1").innerHTML = str;
+}
+setInterval("timer()", 1000);
+//setTimeout("timer()", 1000);
+</script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+
+
+

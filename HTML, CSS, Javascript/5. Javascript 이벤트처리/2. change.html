@@ -1,0 +1,64 @@
+<!--이벤트
+- onclick : 클릭
+- onload : 페이지 로딩 완료
+- onchange : 값이 바뀔 때
+- onmouseover : 마우스 커서가 올라갈 때
+- onmouseout : 마우스 커서가 나갈 때
+- onfocus : 포커스를 얻을 때
+- onblur : 포커스를 잃을 때
+- onkeydown : 키입력을 할 때--!>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function get() {
+    div1 = document.getElementById("div1").innerHTML;
+    alert(div1);
+}
+function set(msg) {
+    document.getElementById("div1").innerHTML = msg;
+}
+function changeImage() {
+    img = document.getElementById("img1");
+    img.src = "tomato.png";
+    img.style.width = "50px";
+    img.style.height = "50px";
+}
+function changeStyle() {
+    div1 = document.getElementById("div1");
+    div1.style.color = "red";
+    div1.style.backgroundColor = "yellow";
+    div1.style.fontSize = "30px";
+    div1.style.fontStyle = "italic";
+}
+function show() {
+    document.getElementById("img1").style.visibility = "visible";
+}
+function hide() {
+    document.getElementById("img1").style.visibility = "hidden";
+}
+</script>
+<style>
+#div1 {
+  background-color: cyan;
+}
+</style>
+</head>
+<body>
+  <div id="div1">div</div>
+  <a href="#" onclick="get()">get div</a>
+  <a href="#" onclick="set('change div')">set div</a>
+  <br>
+  <img id="img1" src="melon.jpg" width="20%" height="20%"><br>
+  <input type="button" value="change image" onclick="changeImage()">
+  <input type="button" value="hide" onclick="hide()">
+  <input type="button" value="show" onclick="show()">
+  <br>
+  <input type="button" value="change text" onclick="changeStyle()">
+</body>
+</html>
+
+
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+    let timer;
+    function msg() {
+    console.log("msg 함수 호출...");
+    }
+    function start() {
+    //timer = setTimeout( "msg()", 1000 );
+    timer = setInterval( "msg()", 1000 );
+    }
+    function stop() {
+    //clearTimeout(timer);
+    clearInterval(timer);
+    }
+  </script>
+</head>
+<body>
+  <button onclick="start()">start timer</button>
+  <button onclick="stop()">stop timer</button>
+</body>
+</html>

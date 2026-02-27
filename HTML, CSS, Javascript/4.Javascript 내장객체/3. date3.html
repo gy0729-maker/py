@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script>
+function calc() {
+    let now = new Date();
+    let newYear = new Date(now.getFullYear() + 1, 0, 1);
+    let diff = newYear - now;
+    diff = diff / 1000;
+    let seconds = Math.floor(diff % 60);
+    diff = diff / 60;
+    let minutes = Math.floor(diff % 60);
+    diff = diff / 60;
+    let hours = Math.floor(diff % 24);
+    diff = diff / 24;
+    let days = Math.floor(diff);
+    let str=`내년 1월 1일까지 ${days}일, ${hours}시간, ${minutes}분, ${seconds}초 남았습니다.`;
+    document.getElementById("div1").innerHTML = str;
+    setTimeout("calc()", 1000);
+}
+</script>
+</head>
+<body onload="calc()">
+  <div id="div1"></div>
+</body>
+</html>
+
+
+

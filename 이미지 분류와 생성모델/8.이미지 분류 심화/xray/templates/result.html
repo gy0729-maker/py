@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diagnosis Result</title>
+</head>
+<body>
+    <h2>진단 결과</h2>
+
+    <img src="{{ url_for('static', filename=filename) }}" width="300">
+
+    <h3>결과: {{ result }}</h3>
+    <h4>확률: {{ probability }}</h4>
+
+    <br>
+    <a href="/">다시 진단하기</a>
+</body>
+</html>
+
+
+
+
